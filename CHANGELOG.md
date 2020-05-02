@@ -7,8 +7,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [Unreleased]
  - update package.json with author, license, repo, etc
  - write a README.md
- - write a function line-logger-cleaner() to delete all line-logger-tokens in a function
  
+ 
+## [0.2.0] - 2020-05-02
+  - wrote functions 'delete-left()' and 'delete-right()' to delete the line number adjecent to the line-logger tokens
+  - wrote a function 'erase()' to erase all line-logger tokens in a file
 
 ## [0.1.1] - 2020-05-02
   - adjusted dependencies in package.json

@@ -2,7 +2,7 @@
 	"name": "line-logger",
 	"displayName": "line-logger",
 	"description": "This extension puts the line numbers next to specific comment tokens, so you can e.g. log them to the console",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"engines": {
 		"vscode": "^1.44.0"
 	},
@@ -10,21 +10,51 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:line-logger.line-logger"
+		"onCommand:line-logger.left",
+		"onCommand:line-logger.right",
+		"onCommand:line-logger.delete-left",
+		"onCommand:line-logger.delete-right",
+		"onCommand:line-logger.erase-tokens"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "line-logger.line-logger",
-				"title": "line-logger logging lines left"
+				"command": "line-logger.left",
+				"title": "log line numbers to the left of the line-logger tokens"
 			},
 			{
-				"command": "line-logger.line-logger-right",
-				"title": "line-logger logging lines to the right"
+				"command": "line-logger.right",
+				"title": "log line numbers to the right of the line-logger tokens"
+			},
+			{
+				"command": "line-logger.delete-left",
+				"title": "delete line numbers adjacent on the left of line-logger tokens"
+			},
+			{
+				"command": "line-logger.delete-right",
+				"title": "delete line numbers adjacent on the right of line-logger tokens"
+			},
+			{
+				"command": "line-logger.erase-tokens",
+				"title": "erases all line-logger tokens"
 			}
 		]
 	},
-	"scripts": {},
-	"dependencies": {}
+	"scripts": {
+		"lint": "eslint .",
+		"pretest": "npm run lint",
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.13.4",
+		"@types/vscode": "^1.44.0",
+		"eslint": "^6.8.0",
+		"glob": "^7.1.6",
+		"mocha": "^7.1.1",
+		"typescript": "^3.8.3",
+		"vscode-test": "^1.3.0"
+	}
 }
