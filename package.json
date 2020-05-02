@@ -1,0 +1,44 @@
+{
+	"name": "line-logger",
+	"displayName": "line-logger",
+	"description": "This extension puts the line numbers next to specific comment tokens, so you can e.g. log them to the console",
+	"version": "0.1.0",
+	"engines": {
+		"vscode": "^1.44.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:line-logger.line-logger"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "line-logger.line-logger",
+				"title": "line-logger logging lines left"
+			},
+			{
+				"command": "line-logger.line-logger-right",
+				"title": "line-logger logging lines to the right"
+			}
+		]
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"pretest": "npm run lint",
+		"test": "node ./test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.44.0",
+		"@types/glob": "^7.1.1",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.11.0",
+		"eslint": "^6.8.0",
+		"glob": "^7.1.6",
+		"mocha": "^7.1.1",
+		"typescript": "^3.8.3",
+		"vscode-test": "^1.3.0"
+	}
+}
