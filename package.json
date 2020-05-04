@@ -1,14 +1,31 @@
 {
 	"name": "line-logger",
 	"displayName": "line-logger",
-	"description": "This extension puts the line numbers next to specific comment tokens, so you can e.g. log them to the console",
-	"version": "0.2.0",
+	"description": "This extension for VS Code writes the line numbers next to specific comment tokens, so you can e.g. log them to the console",
+	"version": "0.3.0",
 	"engines": {
 		"vscode": "^1.44.0"
 	},
-	"categories": [
-		"Other"
+	"keywords": [
+		"line number",
+		"line numbers"
 	],
+	"categories": [],
+	"author": {
+		"name": "Sebastian Aatz",
+		"email": "s.aatz@gmx.de"
+	},
+	"publisher": "TODO:",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Huegelkoenig/line-logger-VSCE.git",
+		"homepage": "https://github.com/Huegelkoenig/line-logger-VSCE"
+	},
+	"bugs": {
+		"url": "https://github.com/Huegelkoenig/line-logger-VSCE/issues"
+	},
+	"icon": "docs/line-logger-icon.png",
+	"license": "MIT",
 	"activationEvents": [
 		"onCommand:line-logger.left",
 		"onCommand:line-logger.right",
@@ -37,7 +54,7 @@
 			},
 			{
 				"command": "line-logger.erase-tokens",
-				"title": "erases all line-logger tokens"
+				"title": "erase all line-logger tokens"
 			}
 		]
 	},

@@ -1,8 +1,12 @@
 const vscode = require('vscode');
 
+//the following tokens support multi-line-comments in Javascript, Java, C, C++, C#, HTML, PHP, Matlab, ColdFusion, AppleScript, Pascal, PowerShell, Swift, Haskell, Lua, OCaml, and more
+const allRegex = [/\/\*LL\*\//g, /<!--LL-->/g, /\(\*LL\*\)/g, /<#LL#>/g, /{\*LL\*}/g, /%{LL%}/g, /--\[\[LL\]\]/g];
+
 function activate(context) {
   // The following line of code will only be executed once when your extension is activated
   // none
+
 
 
   //line-logger logs line numbers to the left side of the tokens
@@ -12,9 +16,7 @@ function activate(context) {
       return
     }
     let document = activeTextEditor.document;
-
-    //the following tokens support multi-line-comments in Javascript, Java, C, C++, C#, HTML, PHP, Matlab, ColdFusion, AppleScript, Pascal, PowerShell, Swift, Haskell, Lua, OCaml, and more
-    let allRegex = [/\/\*LL\*\//g, /<!--LL-->/g, /\(\*LL\*\)/g, /<#LL#>/g, /{\*LL\*}/g, /%{LL%}/g, /--\[\[LL\]\]/g];
+    
     let positions = [];
     allRegex.forEach(regex=>{    
       let match;
@@ -57,8 +59,6 @@ function activate(context) {
     }
     let document = activeTextEditor.document;
 
-    //the following tokens support Javascript, Java, C, C++, C#, HTML, PHP, Matlab, ColdFusion, AppleScript, Pascal, PowerShell, Swift, Haskell, Lua, OCaml, and more
-    let allRegex = [/\/\*LL\*\//g, /<!--LL-->/g, /\(\*LL\*\)/g, /<#LL#>/g, /{\*LL\*}/g, /%{LL%}/g, /--\[\[LL\]\]/g];
     let positions = [];
     allRegex.forEach(regex=>{
       let match;
@@ -91,8 +91,6 @@ function activate(context) {
     }
     let document = activeTextEditor.document;
 
-    //the following tokens support Javascript, Java, C, C++, C#, HTML, PHP, Matlab, ColdFusion, AppleScript, Pascal, PowerShell, Swift, Haskell, Lua, OCaml, and more
-    let allRegex = [/\/\*LL\*\//g, /<!--LL-->/g, /\(\*LL\*\)/g, /<#LL#>/g, /{\*LL\*}/g, /%{LL%}/g, /--\[\[LL\]\]/g];
     let positions = [];
     allRegex.forEach(regex=>{    
       let match;
@@ -135,8 +133,6 @@ function activate(context) {
   }
   let document = activeTextEditor.document;
 
-  //the following tokens support Javascript, Java, C, C++, C#, HTML, PHP, Matlab, ColdFusion, AppleScript, Pascal, PowerShell, Swift, Haskell, Lua, OCaml, and more
-  let allRegex = [/\/\*LL\*\//g, /<!--LL-->/g, /\(\*LL\*\)/g, /<#LL#>/g, /{\*LL\*}/g, /%{LL%}/g, /--\[\[LL\]\]/g];
   let positions = [];
   allRegex.forEach(regex=>{
     let match;
@@ -169,8 +165,6 @@ context.subscriptions.push(deleteRight);
     }
     let document = activeTextEditor.document;
 
-    //the following tokens support Javascript, Java, C, C++, C#, HTML, PHP, Matlab, ColdFusion, AppleScript, Pascal, PowerShell, Swift, Haskell, Lua, OCaml, and more
-    let allRegex = [/\/\*LL\*\//g, /<!--LL-->/g, /\(\*LL\*\)/g, /<#LL#>/g, /{\*LL\*}/g, /%{LL%}/g, /--\[\[LL\]\]/g];
     let ranges = [];
     allRegex.forEach(regex=>{
       let match;

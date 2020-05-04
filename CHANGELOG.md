@@ -6,12 +6,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
  - update package.json with author, license, repo, etc
- - write a README.md
  
- 
+## [0.2.1] - 2020-05-02
+  - added README.md
+
 ## [0.2.0] - 2020-05-02
-  - wrote functions 'delete-left()' and 'delete-right()' to delete the line number adjecent to the line-logger tokens
-  - wrote a function 'erase()' to erase all line-logger tokens in a file
+  - added functions 'delete-left()' and 'delete-right()' to delete the line number adjecent to the line-logger tokens
+  - added a function 'erase()' to erase all line-logger tokens in a file
 
 ## [0.1.1] - 2020-05-02
   - adjusted dependencies in package.json
