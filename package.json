@@ -27,8 +27,8 @@
 	"icon": "docs/line-logger-icon.png",
 	"license": "MIT",
 	"activationEvents": [
-		"onCommand:line-logger.left",
-		"onCommand:line-logger.right",
+		"onCommand:line-logger.log-left",
+		"onCommand:line-logger.log-right",
 		"onCommand:line-logger.delete-left",
 		"onCommand:line-logger.delete-right",
 		"onCommand:line-logger.erase-tokens"
@@ -37,11 +37,11 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "line-logger.left",
+				"command": "line-logger.log-left",
 				"title": "log line numbers to the left of the line-logger tokens"
 			},
 			{
-				"command": "line-logger.right",
+				"command": "line-logger.log-right",
 				"title": "log line numbers to the right of the line-logger tokens"
 			},
 			{
