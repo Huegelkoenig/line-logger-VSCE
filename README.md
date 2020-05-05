@@ -51,7 +51,7 @@ All line-logger tokens will be deleted from your file.
 - If you accidently run `erase tokens`, you can always Edit -> Undo \(CTRL + z\) the last step.
 
 ## Keybindings
-There aren't any [keybindings](https://code.visualstudio.com/docs/getstarted/keybindings) implemented, but you can set your own binding  via &nbsp;&nbsp; File --> Preferences --> Keyboard Shortcuts &nbsp;&nbsp; and entering 'line-logger' into the search bar.<br>
+There aren't any [keybindings](https://code.visualstudio.com/docs/getstarted/keybindings) implemented, but you can set your own bindings  via &nbsp;&nbsp; File --> Preferences --> Keyboard Shortcuts &nbsp;&nbsp; and entering 'line-logger' into the search bar.<br>
 Choose the commands of your choice and assign them the bindings you'd like.<br>
 See also [https://code.visualstudio.com/docs/getstarted/keybindings#_detecting-keybinding-conflicts](https://code.visualstudio.com/docs/getstarted/keybindings) on how to avoid keybinding conflicts.
 
