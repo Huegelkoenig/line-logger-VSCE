@@ -46,12 +46,27 @@ function getRangesOfDigitsToTheLeft(document, positions){
   return ranges;
 }
 
+//gets the ranges of the numbers adjacent to the right side of the tokens
 function getRangesOfDigitsToTheRight(document, positions){
   let ranges = [];
   positions.forEach(position=>{
     ranges.push(document.getWordRangeAtPosition(position,/\d+/) || new vscode.Range(position,position));
   })
   return ranges;
+}
+
+
+function spliceOverlappingRanges(ranges){
+  ranges.sort((range1, range2)=>{ return (range1.start.line == range2.start.line) ? range1.start.character - range2.start.character : range1.start.line - range2.start.line;});
+  let i=0;
+  while (i<ranges.length-1){
+    if (ranges[i].end.line==ranges[i+1].start.line && ranges[i].end.character>=ranges[i+1].start.character){
+      ranges.splice(i+1,1);
+    }
+    else{
+      i++;
+    }
+  }
 }
 
 //logs the line numbers into the given ranges
@@ -92,13 +107,14 @@ function activate(context) {
       return
     }
     let document = activeTextEditor.document;
-    let positions = getStartPositionsOfTokens(document, standardTokens);//positions and ranges for standard and "left"-tagged tokens
-    positions.push(...getStartPositionsOfTokens(document, leftTokens));
+    let positions = getStartPositionsOfTokens(document, standardTokens);  //positions 
+    positions.push(...getStartPositionsOfTokens(document, leftTokens));   //   and ranges for standard tokens and "left"-tagged tokens
     let ranges = getRangesOfDigitsToTheLeft(document, positions);
-    positions = getEndPositionsOfTokens(document, rightTokens); //positions and ranges for "right"-tagged tokens
-    ranges.push(...getRangesOfDigitsToTheRight(document,positions));
+    positions = getEndPositionsOfTokens(document, rightTokens);           //positions 
+    ranges.push(...getRangesOfDigitsToTheRight(document,positions));      //   and ranges for "right"-tagged tokens
+    spliceOverlappingRanges(ranges);
     replaceDigits(activeTextEditor, ranges);
-    showMessage(`line-logger logged ${positions.length} lines to your file`);
+    showMessage(`line-logger logged ${ranges.length} lines to your file`);
 	  })
   );
 
@@ -109,12 +125,12 @@ function activate(context) {
       return
     }
     let document = activeTextEditor.document;
-    let positions = getStartPositionsOfTokens(document, standardTokens);
-    positions.push(...getStartPositionsOfTokens(document, leftTokens));
-    positions.push(...getStartPositionsOfTokens(document, rightTokens));
-    let ranges = getRangesOfDigitsToTheLeft(document, positions);    
+    let positions = getStartPositionsOfTokens(document, standardTokens);  //positions for standard tokens,
+    positions.push(...getStartPositionsOfTokens(document, leftTokens));   //   "left"-tagged tokens
+    positions.push(...getStartPositionsOfTokens(document, rightTokens));  //   and "right"-tagged tokens
+    let ranges = getRangesOfDigitsToTheLeft(document, positions);         
     deleteRanges(activeTextEditor, ranges);
-    showMessage(`line-logger deleted ${positions.length} line numbers from your file`);
+    showMessage(`line-logger deleted up to ${ranges.length} line numbers from your file`);
   }));
 
 
@@ -126,17 +142,14 @@ function activate(context) {
       return
     }
     let document = activeTextEditor.document;
-    let positions = getStartPositionsOfTokens(document, leftTokens);//positions and ranges of "left"-tagged tokens
-    console.log('positions :>> ', positions);
+    let positions = getStartPositionsOfTokens(document, leftTokens);  //positions and ranges of "left"-tagged tokens
     let ranges = getRangesOfDigitsToTheLeft(document, positions);
-    console.log('ranges :>> ', ranges);
-    positions = getEndPositionsOfTokens(document, standardTokens);//positions and ranges of standard and "right"-tagged tokens
+    positions = getEndPositionsOfTokens(document, standardTokens);    //positions and ranges of standard and "right"-tagged tokens
     positions.push(...getEndPositionsOfTokens(document, rightTokens));
-    ranges.push(...getRangesOfDigitsToTheRight(document, positions));
-    console.log('ranges2 :>> ', ranges);
-    console.log('ranges[0].start.line :>> ', ranges[0].start.line);
+    ranges.push(...getRangesOfDigitsToTheRight(document, positions));  
+    spliceOverlappingRanges(ranges);
     replaceDigits(activeTextEditor, ranges);
-    showMessage(`line-logger logged ${positions.length} lines to your file`);
+    showMessage(`line-logger logged ${ranges.length} lines to your file`);
   }));
 
   //line-logger DELETEs adjacent line numbers on the RIGHT side of the tokens
@@ -154,7 +167,7 @@ function activate(context) {
         editBuilder.delete(document.getWordRangeAtPosition(position,/\d+/) || new vscode.Range(position,position));
       });
     });
-    showMessage(`line-logger deleted ${positions.length} line numbers from your file`);
+    showMessage(`line-logger deleted up to ${positions.length} line numbers from your file`);
   }));
 
 

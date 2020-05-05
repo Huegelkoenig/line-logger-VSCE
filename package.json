@@ -2,7 +2,7 @@
 	"name": "line-logger",
 	"displayName": "line-logger",
 	"description": "This extension for VS Code writes the line numbers next to specific comment tokens, so you can e.g. log them to the console",
-	"version": "0.3.1",
+	"version": "0.4.0",
 	"engines": {
 		"vscode": "^1.44.0"
 	},
