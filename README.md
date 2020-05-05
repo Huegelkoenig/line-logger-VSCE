@@ -14,30 +14,32 @@ This includes Java, Javascript, C, C++, C#, HTML, PHP, Matlab, ColdFusion, Apple
 Just install this extension from the VS Code marketplace. Afterwards you may need to restart VS Code. That's it.
 
 ## How it works
+You can place line-logger tokens anywhere in your code. Upon calling a log command from your Command Palette, this extension searches your code for the line-logger tokens and hardcodes the corresponding line number right in front of (or right behin) the tokens into your code. 
 ### Tokens
 A line-logger token is basically just a multiline comment with nothing but `LL` in it.<br>
-E.g. in Java, C or Javascript a multiline comment is represented by the opening tags `/*` and the closing tags `*/`. Hence a line-logger token would look like this: `/*LL*/` .<br>
-In general, you can put line-logger tokens anywhere in your code, but in order for your code to work, you must of course take care that the syntax of your code is still correct.<br>
-With one or more tokens in place you can then run one of the line-logger [commands](#commands) below.<br>
+In e.g. Java, C or Javascript a multiline comment is represented by the opening tags `/*` and the closing tags `*/`. Hence a line-logger token would look like this: `/*LL*/` .<br>
+In general, you can place line-logger tokens anywhere in your code. However, this extension doesn't check if your code is still correct, neither after you placed your tokens, nor after the line numbers are written to (or deleted from) your code. It's up to you to take care that the tokens are placed in a way so that the syntax of your code is still correct.<br>
+
+### Line numbers
+The line-logger tokens treat any directly adjacent sequence of digits as a line-number. Line numbers will be updated on every call of a line-logger command.
 
 ### Commands
-Hit CTRL + SHIFT + P to open the Command Palette and enter one of the following commands.<br>
-Since the Command Palette uses a built in search function, you can search for the commands by entering in correct order any words appearing in the commands. Because of this, you can e.g. just enter `>line-logger` and select one of the appearign commands, use the suggested short form or make up your own short form.
+Hit CTRL + SHIFT + P to open the Command Palette and enter one of the commands below.<br>
+Since the Command Palette uses a built in search function, you can simplify the commands by entering any words appearing in the commands in correct order. Because of this, you can e.g. just enter `>line-logger` and select one of the appearing commands, use the suggested short form or make up your own short form.
 
 >`>log line numbers to the left of the line-logger tokens`  &nbsp;&nbsp;&nbsp;&nbsp;\(suggested short form: `>log left`\)<br>
-The line numbers will be written to the left of the tokens. If there is already a number on the left side of a token, the number will be updated.
+The line numbers will be written in front of the tokens. Already existing line numbers in front of the tokens will be updated. Line numbers behind the tokens won't be changed.
 
 >`>log line numbers to the right of the line-logger tokens`  &nbsp;&nbsp;&nbsp;&nbsp;\(suggested short form: `>log right`\)<br>
-The line numbers will be written to the right of the tokens. If there is already a number on the right side of a token, the number will be updated.
-
+The line numbers will be written behind the tokens. Already existing line numbers behind the tokens will be updated. Line numbers in front of the tokens won't be changed.
 >`>delete line numbers adjacent on the left of line-logger tokens`  &nbsp;&nbsp;&nbsp;&nbsp;\(suggested short form: `>delete left`\)<br>
-The line numbers on the left side of the tokens will be deleted.
+May existing line numbers in front of the tokens will be deleted.
 
 >`>delete line numbers adjacent on the right of line-logger tokens`  &nbsp;&nbsp;&nbsp;&nbsp;\(suggested short form: `>delete right`\)<br>
-The line numbers on the right side of the tokens will be deleted.
+May existing line numbers behind the tokens will be deleted.
 
 >`>erase all line-logger tokens`  &nbsp;&nbsp;&nbsp;&nbsp;\(suggested short form: `>erase tokens`\)<br>
-All line-logger tokens will be deleted from your file.
+All line-logger tokens will be deleted from your file. This helps you to clean your code if you dont' need the tokens anymore. You may want to run `>delete left` and/or `>delete right`first.
 
 ### Things to keep in mind
 - Any of these commands alters your code, meaning the line numbers will be hardcoded into (or deleted from) your code.<br>

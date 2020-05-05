@@ -1,7 +1,7 @@
 const vscode = require('vscode');
 
 //the following tokens support multi-line-comments in Javascript, Java, C, C++, C#, HTML, PHP, Matlab, ColdFusion, AppleScript, Pascal, PowerShell, Swift, Haskell, Lua, OCaml, and more
-const standardTokens = [/\/\*LL\*\//g, /<!--LL-->/g, /\(\*LL\*\)/g, /<#LL#>/g, /{\*LL\*}/g, /%{LL%}/g, /--\[\[LL\]\]/g];
+const standardTokens = [/\/\*LL\*\//g, /<!--LL-->/g, /\(\*LL\*\)/g, /<#LL#>/g, /\{\*LL\*\}/g, /%\{LL%\}/g, /--\[\[LL\]\]/g];
 
 function activate(context) {
   // The following line of code will only be executed once when your extension is activated
@@ -10,7 +10,7 @@ function activate(context) {
 
 
   //line-logger logs line numbers to the left side of the tokens
-  context.subscriptions.push(vscode.commands.registerCommand('line-logger.left', function () {
+  context.subscriptions.push(vscode.commands.registerCommand('line-logger.log-left', function () {
     let activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor === undefined){
       return
@@ -51,7 +51,7 @@ function activate(context) {
 
 
   //line-logger logs line numbers to the right side of the tokens
-  context.subscriptions.push(vscode.commands.registerCommand('line-logger.right', function () {
+  context.subscriptions.push(vscode.commands.registerCommand('line-logger.log-right', function () {
     let activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor === undefined){
       return
@@ -115,7 +115,7 @@ function activate(context) {
       });
     });
 
-    let statusBarMsg = vscode.window.setStatusBarMessage(`line-logger deleted ${positions.length} line numbers from your file`);
+    let statusBarMsg = vscode.window.setStatusBarMessage(`line-logger deleted up to ${positions.length} line numbers from your file`);
     setTimeout(()=>{statusBarMsg.dispose()},3000);
   }));
 
@@ -146,12 +146,12 @@ function activate(context) {
       });
     });
 
-    let statusBarMsg = vscode.window.setStatusBarMessage(`line-logger deleted ${positions.length} line numbers from your file`);
+    let statusBarMsg = vscode.window.setStatusBarMessage(`line-logger deleted up to ${positions.length} line numbers from your file`);
     setTimeout(()=>{statusBarMsg.dispose()},3000);
-}));
+  }));
 
 
-
+  
 
   //cleans the file of all line-logger tokens
   context.subscriptions.push(vscode.commands.registerCommand('line-logger.erase-tokens', function () {
