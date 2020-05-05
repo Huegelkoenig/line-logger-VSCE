@@ -5,8 +5,8 @@ const standardTokens = [/\/\*LL\*\//g, /<!--LL-->/g, /\(\*LL\*\)/g, /<#LL#>/g, /
 const leftTokens = [/\/\*LL:L\*\//g, /<!--LL:L-->/g, /\(\*LL:L\*\)/g, /<#LL:L#>/g, /{\*LL:L\*}/g, /%{LL:L%}/g, /--\[\[LL:L\]\]/g];
 const rightTokens = [/\/\*LL:R\*\//g, /<!--LL:R-->/g, /\(\*LL:R\*\)/g, /<#LL:R#>/g, /{\*LL:R\*}/g, /%{LL:R%}/g, /--\[\[LL:R\]\]/g];
 
-//gets the starting positions of the tokens
-function tokenStartPositions(document, regexArray){
+//gets the start positions of the tokens
+function getStartPositionsOfTokens(document, regexArray){
   let positions = [];
   regexArray.forEach(regex=>{    
     let match;
@@ -18,8 +18,8 @@ function tokenStartPositions(document, regexArray){
   return positions;
 }
 
-//gets the ending positions of the tokens
-function tokenEndPositions(document, regexArray){
+//gets the end positions of the tokens
+function getEndPositionsOfTokens(document, regexArray){
   let positions = [];
   regexArray.forEach(regex=>{
     let match;
@@ -32,7 +32,7 @@ function tokenEndPositions(document, regexArray){
 }
 
 //gets the ranges of the numbers adjacent to the left side of the tokens
-function getRangesOfDigitsLeft(document, positions){
+function getRangesOfDigitsToTheLeft(document, positions){
   let ranges = [];
   positions.forEach(position=>{
     let startCharacterPos = 0;
@@ -45,10 +45,17 @@ function getRangesOfDigitsLeft(document, positions){
   });
   return ranges;
 }
-//function getRangesOfDigitsRight() is not declared, since vscode already has the .getWordRangeAtPosition() method
+
+function getRangesOfDigitsToTheRight(document, positions){
+  let ranges = [];
+  positions.forEach(position=>{
+    ranges.push(document.getWordRangeAtPosition(position,/\d+/) || new vscode.Range(position,position));
+  })
+  return ranges;
+}
 
 //logs the line numbers into the given ranges
-function replaceNumbers(activeTextEditor, ranges){
+function replaceDigits(activeTextEditor, ranges){
   activeTextEditor.edit(editBuilder=>{
     ranges.forEach(range=>{
       editBuilder.replace(range, (range.start.line+1).toString());
@@ -65,12 +72,18 @@ function deleteRanges(activeTextEditor, ranges){
   });
 }
 
+function showMessage(msg){
+  let statusBarMsg = vscode.window.setStatusBarMessage(msg);
+  setTimeout(()=>{statusBarMsg.dispose()},3000);
+}
+
 
 
 
 function activate(context) {
   // The following line of code will only be executed once when your extension is activated
   // none
+
 
   //line-logger LOGs line numbers to the LEFT side of the tokens
   context.subscriptions.push(vscode.commands.registerCommand('line-logger.log-left', function () {
@@ -79,15 +92,30 @@ function activate(context) {
       return
     }
     let document = activeTextEditor.document;
-    let positions = tokenStartPositions(document, standardTokens);
-    positions.push(...tokenStartPositions(document, leftTokens));
-    let ranges = getRangesOfDigitsLeft(document, positions);    
-    replaceNumbers(activeTextEditor, ranges);
-    let statusBarMsg = vscode.window.setStatusBarMessage(`line-logger logged ${positions.length} lines to your file`);
-    setTimeout(()=>{statusBarMsg.dispose()},3000);
+    let positions = getStartPositionsOfTokens(document, standardTokens);//positions and ranges for standard and "left"-tagged tokens
+    positions.push(...getStartPositionsOfTokens(document, leftTokens));
+    let ranges = getRangesOfDigitsToTheLeft(document, positions);
+    positions = getEndPositionsOfTokens(document, rightTokens); //positions and ranges for "right"-tagged tokens
+    ranges.push(...getRangesOfDigitsToTheRight(document,positions));
+    replaceDigits(activeTextEditor, ranges);
+    showMessage(`line-logger logged ${positions.length} lines to your file`);
 	  })
   );
 
+  //line-logger DELETEs adjacent line numbers on the LEFT side of the tokens
+  context.subscriptions.push(vscode.commands.registerCommand('line-logger.delete-left', function () {
+    let activeTextEditor = vscode.window.activeTextEditor;
+    if (activeTextEditor === undefined){
+      return
+    }
+    let document = activeTextEditor.document;
+    let positions = getStartPositionsOfTokens(document, standardTokens);
+    positions.push(...getStartPositionsOfTokens(document, leftTokens));
+    positions.push(...getStartPositionsOfTokens(document, rightTokens));
+    let ranges = getRangesOfDigitsToTheLeft(document, positions);    
+    deleteRanges(activeTextEditor, ranges);
+    showMessage(`line-logger deleted ${positions.length} line numbers from your file`);
+  }));
 
 
 
@@ -98,37 +126,18 @@ function activate(context) {
       return
     }
     let document = activeTextEditor.document;
-    let positions = tokenEndPositions(document, standardTokens);
-    positions.push(...tokenStartPositions(document, rightTokens));
-    activeTextEditor.edit(editBuilder=>{
-      positions.forEach(position=>{
-        editBuilder.replace(document.getWordRangeAtPosition(position,/\d+/) || new vscode.Range(position,position), `${position.line+1}`);
-      });
-    });
-    let statusBarMsg = vscode.window.setStatusBarMessage(`line-logger logged ${positions.length} lines to your file`);
-    setTimeout(()=>{statusBarMsg.dispose()},3000);
+    let positions = getStartPositionsOfTokens(document, leftTokens);//positions and ranges of "left"-tagged tokens
+    console.log('positions :>> ', positions);
+    let ranges = getRangesOfDigitsToTheLeft(document, positions);
+    console.log('ranges :>> ', ranges);
+    positions = getEndPositionsOfTokens(document, standardTokens);//positions and ranges of standard and "right"-tagged tokens
+    positions.push(...getEndPositionsOfTokens(document, rightTokens));
+    ranges.push(...getRangesOfDigitsToTheRight(document, positions));
+    console.log('ranges2 :>> ', ranges);
+    console.log('ranges[0].start.line :>> ', ranges[0].start.line);
+    replaceDigits(activeTextEditor, ranges);
+    showMessage(`line-logger logged ${positions.length} lines to your file`);
   }));
-
-
-
-
-  //line-logger DELETEs adjacent line numbers on the LEFT side of the tokens
-  context.subscriptions.push(vscode.commands.registerCommand('line-logger.delete-left', function () {
-    let activeTextEditor = vscode.window.activeTextEditor;
-    if (activeTextEditor === undefined){
-      return
-    }
-    let document = activeTextEditor.document;
-    let positions = tokenStartPositions(document, standardTokens);
-    positions.push(...tokenStartPositions(document, leftTokens));
-    let ranges = getRangesOfDigitsLeft(document, positions);    
-    deleteRanges(activeTextEditor, ranges);
-    let statusBarMsg = vscode.window.setStatusBarMessage(`line-logger deleted ${positions.length} line numbers from your file`);
-    setTimeout(()=>{statusBarMsg.dispose()},3000);
-  }));
-
-
-
 
   //line-logger DELETEs adjacent line numbers on the RIGHT side of the tokens
   context.subscriptions.push(vscode.commands.registerCommand('line-logger.delete-right', function () {
@@ -137,17 +146,16 @@ function activate(context) {
       return
     }
     let document = activeTextEditor.document;
-    let positions = tokenEndPositions(document, standardTokens);
-    positions.push(...tokenStartPositions(document, rightTokens))
+    let positions = getEndPositionsOfTokens(document, standardTokens);
+    positions.push(...getEndPositionsOfTokens(document, leftTokens))
+    positions.push(...getEndPositionsOfTokens(document, rightTokens));
     activeTextEditor.edit(editBuilder=>{
       positions.forEach(position=>{
         editBuilder.delete(document.getWordRangeAtPosition(position,/\d+/) || new vscode.Range(position,position));
       });
     });
-    let statusBarMsg = vscode.window.setStatusBarMessage(`line-logger deleted ${positions.length} line numbers from your file`);
-    setTimeout(()=>{statusBarMsg.dispose()},3000);
+    showMessage(`line-logger deleted ${positions.length} line numbers from your file`);
   }));
-
 
 
 
@@ -159,16 +167,15 @@ function activate(context) {
     }
     let document = activeTextEditor.document;
     let ranges = [];
-    standardTokens.forEach(regex=>{
+    [...standardTokens,...leftTokens,...rightTokens].forEach(regex=>{
       let match;
       let text = document.getText(); //must be reloaded for every loop
       while ((match = regex.exec(text)) !== null) {
         ranges.push(new vscode.Range(document.positionAt(match.index), document.positionAt(match.index + match[0].length)));
       }
     });
-    deleteRanges(activeTextEditor);
-		let statusBarMsg = vscode.window.setStatusBarMessage(`line-logger erased ${ranges.length} tokens from your file`);
-    setTimeout(()=>{statusBarMsg.dispose()},3000);
+    deleteRanges(activeTextEditor,ranges);
+		showMessage(`line-logger erased ${ranges.length} tokens from your file`);
 	}));
 }
 
