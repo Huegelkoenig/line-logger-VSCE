@@ -8,5 +8,4 @@ vsc-extension-quickstart.md
 **/.eslintrc.json
 temp/**
 .git/**
-graphics/**
 node_modules/**

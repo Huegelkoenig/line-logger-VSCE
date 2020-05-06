@@ -1,7 +1,7 @@
 const vscode = require('vscode');
 
 //the following tokens support multi-line-comments in Javascript, Java, C, C++, C#, HTML, PHP, Matlab, ColdFusion, AppleScript, Pascal, PowerShell, Swift, Haskell, Lua, OCaml, and more
-const standardTokens = [/\/\*LL\*\//g, /<!--LL-->/g, /\(\*LL\*\)/g, /<#LL#>/g, /\{\*LL\*\}/g, /%\{LL%\}/g, /--\[\[LL\]\]/g];
+const standardTokens = [/\/\*LL\*\//g, /<!--LL-->/g, /\(\*LL\*\)/g, /<#LL#>/g, /\{\*LL\*\}/g, /\{-LL-\}/g, /%\{LL%\}/g, /--\[\[LL\]\]/g];
 
 function activate(context) {
   // The following line of code will only be executed once when your extension is activated

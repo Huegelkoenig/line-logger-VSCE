@@ -4,9 +4,11 @@ All notable changes to the "line-logger" extension will be documented in this fi
 
 
 ## [Unreleased]
- - add flagged tokens /*LL:L*/ and /*LL:R*/, so you can individually decide wether the line numbers shall be logged in front or behind the tokens.
-   Already implemented, but somehow i don't like it, so it's unreleased. See branch LR.
- - 
+ - add flagged tokens /*LL:L*/ and /*LL:R*/, so you can individually decide for some tokens wether the line numbers shall be logged in front or behind the tokens. This is already implemented in the branch LR, but i don't like the way it's coded and would like to change stuff, so it's unreleased, yet.
+
+## [1.0.0] - 2020-05-06
+  - release
+  - fixed more typos
 
 ## [0.3.4] - 2020-05-06
   - added pictures to README.md
