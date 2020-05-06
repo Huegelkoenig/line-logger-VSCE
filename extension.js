@@ -9,14 +9,13 @@ function activate(context) {
 
 
 
-  //line-logger logs line numbers to the left side of the tokens
+  //line-logger LOGs line numbers to the LEFT side of the tokens
   context.subscriptions.push(vscode.commands.registerCommand('line-logger.log-left', function () {
     let activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor === undefined){
       return
     }
     let document = activeTextEditor.document;
-    
     let positions = [];
     standardTokens.forEach(regex=>{    
       let match;
@@ -50,7 +49,7 @@ function activate(context) {
 
 
 
-  //line-logger logs line numbers to the right side of the tokens
+  //line-logger LOGs line numbers to the RIGHT side of the tokens
   context.subscriptions.push(vscode.commands.registerCommand('line-logger.log-right', function () {
     let activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor === undefined){
@@ -81,7 +80,7 @@ function activate(context) {
 
 
 
-  //line-logger deletes adjacent line numbers on the left side of the tokens
+  //line-logger DELETEs adjacent line numbers on the LEFT side of the tokens
   context.subscriptions.push(vscode.commands.registerCommand('line-logger.delete-left', function () {
     let activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor === undefined){
@@ -122,7 +121,7 @@ function activate(context) {
 
 
 
-  //line-logger logs line numbers to the right side of the tokens
+  //line-logger DELETEs adjacent line numbers on the RIGHT side of the tokens
   context.subscriptions.push(vscode.commands.registerCommand('line-logger.delete-right', function () {
     let activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor === undefined){
@@ -153,7 +152,7 @@ function activate(context) {
 
   
 
-  //cleans the file of all line-logger tokens
+  //ERASEs all line-logger TOKENS in the file
   context.subscriptions.push(vscode.commands.registerCommand('line-logger.erase-tokens', function () {
     let activeTextEditor = vscode.window.activeTextEditor;
     if (activeTextEditor === undefined){

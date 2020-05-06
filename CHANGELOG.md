@@ -2,11 +2,23 @@
 
 All notable changes to the "line-logger" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
 ## [Unreleased]
- - update package.json with author, license, repo, etc
- 
+ - add flagged tokens /*LL:L*/ and /*LL:R*/, so you can individually decide wether the line numbers shall be logged in front or behind the tokens.
+   Already implemented, but somehow i don't like it, so it's unreleased. See branch LR.
+ - 
+
+## [0.3.4] - 2020-05-06
+  - added pictures to README.md
+  - fixed some more typos
+  - updated package.json with author, license, repo, etc 
+
+## [0.3.3] - 2020-05-05
+  - fixed some typos
+
+## [0.3.0] - 2020-05-04
+  - added an ico
+
 ## [0.2.1] - 2020-05-02
   - added README.md
 
