@@ -1,6 +1,6 @@
 # line-logger README
 
-An extension for Visual Studio Code which logs the line numbers next to specific tokens, so you can e.g. debug your code more efficiently.
+Make debugging faster with this extension for Visual Studio Code which logs the line numbers next to specific tokens.<br>
 
 ![demo.gif](./graphics/demo.gif)
 
@@ -23,7 +23,7 @@ The line-logger extension works with any programming language that allows multil
 This includes Java, Javascript, C, C++, C#, HTML, PHP, Matlab, ColdFusion, AppleScript, Pascal, PowerShell, D, Swift, Haskell, Lua, OCaml, and more
 
 ## Installation
-Just install this extension from the VS Code marketplace. Afterwards you may need to restart VS Code. That's it.
+Just install this extension from the VS Code marketplace. Afterwards you may get prompted to restart VS Code. That's it.
 
 ## How It Works
 You can place line-logger tokens anywhere in your code. Upon calling a log command (see [Commands](###commands)) from the Command Palette, this extension searches for the line-logger tokens in your code and hardcodes the corresponding line numbers right in front of (or right behind) the tokens. Existing line numbers will be updated during this process.<br> 
