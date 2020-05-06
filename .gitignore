@@ -1,5 +1,10 @@
 node_modules
 .vscode-test/
 *.vsix
-temp/
+temp
 .git/
+.vscode/
+.gitignore
+.vscodeignore
+test
+jsconfig.json
