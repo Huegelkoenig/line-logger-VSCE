@@ -15,13 +15,14 @@ Make debugging faster with this extension for Visual Studio Code which logs the 
 [Known Issues](#known-issues)<br>
 [Release Notes](#release-notes)<br>
 
-![example.png](./graphics/example.png)<br>
 
 ## Supported Languages
 The line-logger extension works with any programming language that allows multiline comments in one of the following formats:<br>
 > `/* */`&nbsp;&nbsp;,&nbsp;&nbsp;`<!--  -->`&nbsp;&nbsp;,&nbsp;&nbsp;`(* *)`&nbsp;&nbsp;,&nbsp;&nbsp;`<# #>`&nbsp;&nbsp;,&nbsp;&nbsp;`{- -}`&nbsp;&nbsp;,&nbsp;&nbsp;`\* *\`&nbsp;&nbsp;,&nbsp;&nbsp;`%{ %}`&nbsp;&nbsp;or&nbsp;&nbsp;`--[[ ]]`<br>
 
-This includes Java, Javascript, C, C++, C#, HTML, PHP, Matlab, ColdFusion, AppleScript, Pascal, PowerShell, D, Swift, Haskell, Lua, OCaml, and more
+This includes Java, Javascript, C, C++, C#, HTML, PHP, Matlab, ColdFusion, AppleScript, Pascal, PowerShell, D, Swift, Haskell, Lua, OCaml, and more.<br>
+
+![example.png](./graphics/example.png)<br>
 
 ## Installation
 Just install this extension from the VS Code marketplace. Afterwards you may get prompted to restart VS Code. That's it.
