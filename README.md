@@ -1,8 +1,7 @@
 # line-logger README
 
 Make debugging faster with this extension for Visual Studio Code which logs the line numbers next to specific tokens.<br>
-
-![demo.gif](./graphics/demo.gif)
+![demo.gif](./graphics/demo.gif)<br>
 
 ## Content
 [Supported Languages](#supported-languages)<br>
@@ -15,6 +14,8 @@ Make debugging faster with this extension for Visual Studio Code which logs the 
 [Keybindings](#keybindings)<br>
 [Known Issues](#known-issues)<br>
 [Release Notes](#release-notes)<br>
+
+![example.png](./graphics/example.png)<br>
 
 ## Supported Languages
 The line-logger extension works with any programming language that allows multiline comments in one of the following formats:<br>
