@@ -2,7 +2,7 @@
 	"name": "line-logger",
 	"displayName": "line-logger",
 	"description": "Make debugging faster with this extension for Visual Studio Code which logs the line numbers next to specific tokens.",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"engines": {
 		"vscode": "^1.44.0"
 	},
