@@ -8,7 +8,6 @@ function activate(context) {
   // none
 
 
-
   //line-logger LOGs line numbers to the LEFT side of the tokens
   context.subscriptions.push(vscode.commands.registerCommand('line-logger.log-left', function () {
     let activeTextEditor = vscode.window.activeTextEditor;
