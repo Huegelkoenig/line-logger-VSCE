@@ -6,6 +6,13 @@ All notable changes to the "line-logger" extension will be documented in this fi
 ## [Unreleased]
  - add flagged tokens /*LL:L*/ and /*LL:R*/, so you can individually decide for some tokens wether the line numbers shall be logged in front or behind the tokens. This is already implemented in the branch LR, but i don't like the way it's coded and would like to change stuff, so it's unreleased, yet.
 
+## [2.0.0] - 2021-06-04
+  - when using prettier or other file formatters there will be a space added to the line-logger tokens. Added some commands which add (and assume!) a single space between the tokens and the line numbers
+  - the original commands were slightly altered to keep the ordering
+
+## [1.0.7] - 2020-05-06
+  - minor changes, typos etc
+
 ## [1.0.0] - 2020-05-06
   - release
   - fixed more typos

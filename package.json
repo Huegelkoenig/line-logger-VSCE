@@ -1,7 +1,7 @@
 {
 	"name": "line-logger",
 	"displayName": "line-logger",
-	"description": "Make debugging faster with this extension for Visual Studio Code which logs the line numbers next to specific tokens.",
+	"description": "Make debugging faster with this extension for Visual Studio Code, which logs the line numbers next to specific tokens.",
 	"version": "1.0.7",
 	"engines": {
 		"vscode": "^1.44.0"
@@ -31,6 +31,10 @@
 		"onCommand:line-logger.log-right",
 		"onCommand:line-logger.delete-left",
 		"onCommand:line-logger.delete-right",
+    "onCommand:line-logger.log-space-left",
+		"onCommand:line-logger.log-space-right",
+		"onCommand:line-logger.delete-space-left",
+		"onCommand:line-logger.delete-space-right",
 		"onCommand:line-logger.erase-tokens"
 	],
 	"main": "src/extension.js",
@@ -46,11 +50,27 @@
 			},
 			{
 				"command": "line-logger.delete-left",
-				"title": "delete line numbers adjacent on the left of line-logger tokens"
+				"title": "delete line numbers adjacent to the left of line-logger tokens"
 			},
 			{
 				"command": "line-logger.delete-right",
-				"title": "delete line numbers adjacent on the right of line-logger tokens"
+				"title": "delete line numbers adjacent to the right of line-logger tokens"
+			},
+      {
+				"command": "line-logger.log-space-left",
+				"title": "log line numbers with a space to the left of the line-logger tokens"
+			},
+			{
+				"command": "line-logger.log-space-right",
+				"title": "log space and line numbers to the right of the line-logger tokens"
+			},
+			{
+				"command": "line-logger.delete-space-left",
+				"title": "delete line numbers and spaces to the left of line-logger tokens"
+			},
+			{
+				"command": "line-logger.delete-space-right",
+				"title": "delete spaces and line numbers to the right of line-logger tokens"
 			},
 			{
 				"command": "line-logger.erase-tokens",
