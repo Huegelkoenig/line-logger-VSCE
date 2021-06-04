@@ -1,3 +1,4 @@
+
 function validateString(a,b){return true;}
 let pool;
 class Status{constructor(aa){}}
@@ -10,7 +11,7 @@ function getEmail(username){
       reject(new Status({status: 'rejected',
                          file: 'database.js',
                          func: 'getEmail()',
-                         line: 13/*LL*/,
+                         line: 14/*LL*/,
                          msg:"Invalid characters in 'username'. Allowed characters are 0-9, a-z, A-Z, and . _ -"}));
     }
     pool.query('SELECT username, email FROM users WHERE username = ?;', [username],
@@ -19,7 +20,7 @@ function getEmail(username){
           reject(new Status({status:'error',
                              file:'database.js',
                              func: 'getEmail()',
-                             line: 22/*LL*/,
+                             line: 23/*LL*/,
                              msg: `pool.query threw an error, see .error for details`,
                              error: err}));
         }
